@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables */
+:root {
+  --background: #0a0e17;
+  --foreground: #f8fafc;
+  --accent-green: #00ff9d;
+  --accent-amber: #fbbf24;
+  --accent-gold: #d4af37;
+  --glass-bg: rgba(17, 24, 39, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 255, 157, 0.3);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a2332;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ff9d;
+}
+
+/* Glassmorphism Utilities */
+@layer components {
+  .glass {
+    @apply backdrop-blur-lg bg-black/30 border border-white/10;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl;
+    box-shadow: 
+      0 4px 30px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 ease-out;
+  }
+
+  .glass-card-hover:hover {
+    @apply bg-white/10 border-white/20;
+    box-shadow: 
+      0 8px 40px rgba(0, 255, 157, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .glass-nav {
+    @apply backdrop-blur-xl bg-black/50 border-b border-white/5;
+  }
+
+  .glass-nav-scrolled {
+    @apply backdrop-blur-2xl bg-black/70 border-b border-white/10;
+  }
+
+  /* Neon Glow Effects */
+  .glow-green {
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+  }
+
+  .glow-green-strong {
+    box-shadow: 0 0 40px rgba(0, 255, 157, 0.5);
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 20px rgba(0, 255, 157, 0.5);
+  }
+
+  /* Gradient Backgrounds */
+  .bg-gradient-dark {
+    background: linear-gradient(180deg, #0a0e17 0%, #111827 50%, #0d1320 100%);
+  }
+
+  .bg-gradient-radial-dark {
+    background: radial-gradient(ellipse at center, #111827 0%, #0a0e17 70%);
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply relative px-6 py-3 bg-ht-green text-ht-navy-900 font-semibold rounded-lg overflow-hidden transition-all duration-300 inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-primary:hover {
+    @apply glow-green;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 border border-white/20 text-white font-medium rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-secondary:hover {
+    @apply border-ht-green/50 bg-ht-green/10;
+  }
+
+  /* Typography */
+  .heading-xl {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight;
+  }
+
+  .heading-md {
+    @apply text-2xl sm:text-3xl font-semibold;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-ht-green to-ht-gold bg-clip-text text-transparent;
+  }
+
+  /* Code/Number Styles */
+  .font-mono-numbers {
+    @apply font-mono tabular-nums;
+  }
+
+  /* Section Spacing */
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  .section-py {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* Focus Styles */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ht-green focus-visible:ring-offset-2 focus-visible:ring-offset-ht-navy-900;
+  }
+}
+
+/* Particle Canvas */
+.particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Accessibility - Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #00ff9d;
+  color: #0a0e17;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .particle-canvas,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
